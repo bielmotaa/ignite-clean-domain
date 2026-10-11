@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto"
 
 // entidade que representa o aluno, quem posta as duvidas (Question) 
 // no forum
-class Student {
+export class Student {
     public id: string
     public name: string
 

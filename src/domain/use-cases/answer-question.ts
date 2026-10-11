@@ -11,11 +11,12 @@ interface AnswerQuestionUseCaseRequest {
 // instrutor respondendo uma pergunta do aluno
 export class AnswerQuestionUseCase {
     execute({ instructorId, questionId, content }: AnswerQuestionUseCaseRequest) {
-        // cria a resposta (Answer) com o conteudo informado
-        // obs: instructorId e questionId ainda nao sao usados, 
-        // a Answer so guarda (cria) o content por enquanto
-        const answer = new Answer(content)
-
+        // cria a resposta (Answer) referente a questao/pergunta criada
+        const answer = new Answer({
+            content,
+            authorId: instructorId,
+            questionId,
+          })
         return answer // retornando a respota
     }
 }
