@@ -1,16 +1,27 @@
 import { Entity } from "@/core/entities/entity.js"
+import type { UniqueEntityID } from "@/core/entities/unique-entity-id.js"
 
 // Entidade que representa a resposta dada a uma duvida (Question),
 // normalmente escrita por um Instructor
 
 interface AnswerProps {
+    //O id do professor ou aluno que responder a questao/pergunta
+    // nao eh mais uma string solta, eh um OBJETO da classe UniqueEntityID.
+    // pra definir o valor eu preciso criar o objeto com new:
+    // authorId: new UniqueEntityID('id-do-professor')
+    // e pra ler o valor de volta: answer.authorId.toValue()
+    authorId: UniqueEntityID
+    //O id de qual perginta esta sendo respondida
+    // tambem eh um OBJETO UniqueEntityID, mesma regra do authorId:
+    // questionId: new UniqueEntityID('id-da-pergunta')
+    questionId: UniqueEntityID
+
     //conteudo da respota
     content: string
-    //O id do professor ou aluno que responder a questao/pergunta
-    authorId: string
-    //O id de qual perginta esta sendo respondida
-    questionId: string
-}
+
+    createdAt: Date // data de criacao
+    updatedAt?: Date // data de atualizacao da resposta 
+}  
 
 // <AnswerProps> preenche o <Props> generico do Entity, ou seja, diz ao Entity 
 // o tipo de formato dessa entidade
