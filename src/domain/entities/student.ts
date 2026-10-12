@@ -1,15 +1,14 @@
-import { randomUUID } from "node:crypto"
-
-// entidade que representa o aluno, quem posta as duvidas (Question) 
+import { Entity } from "@/core/entities/entity.js"
+// Entidade que representa o aluno, quem posta as duvidas (Question)
 // no forum
-export class Student {
-    public id: string
-    public name: string
+interface StudentProps {
+    // nome do aluno, quem posta as duvidas (Question) no forum
+    name: string
+}
 
-    constructor(name: string, id?: string) {
-        this.name = name
-        // se eu passo o id, eh por conta que eu estou querendo realizar uma referencia a um Student
-        // ja criado, caso eu nao passo, eu crio com um ID -randomUUID (ou seja, crio esse novo Student)
-        this.id = id ?? randomUUID()
+export class Student extends Entity<StudentProps> {
+    constructor(props: StudentProps, id?: string) {
+        // enviando o id e as props para o construtor da minha classe Entity
+        super(props, id)
     }
 }

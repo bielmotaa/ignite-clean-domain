@@ -1,33 +1,26 @@
-import { randomUUID } from "node:crypto"
+import { Entity } from "@/core/entities/entity.js"
 import type { Slug } from "./value-objects/slug.js"
 
+// Entidade que representa uma duvida postada no forum,
+// a qual recebe respostas (Answer)
 
 interface QuestionProps {
+    // titulo da duvida, e' a partir dele que o slug eh gerado
     title: string
+    // conteudo da duvida (o texto completo da pergunta)
     content: string
+    // versao do titulo amigavel para URL (ex: "como-criar-uma-api"),
+    // e' um Value Object, entao sempre passa pela normalizacao do Slug
     slug: Slug
+    // o id de quem esta' criando a pergunta (normalmente um Student)
     authorId: string
 }
 
-// entidade que representa uma duvida postada no forum, 
-// a qual recebe respostas (Answer)
-export class Question {
-    public id: string
-    public title: string
-    public slug: Slug
-    public content: string //conteudo da duvida
-    // o id de quem esta' criando a pergunta
-    public authorId: string
 
+export class Question extends Entity<QuestionProps> {
     constructor(props: QuestionProps, id?: string) {
-        this.title = props.title
-        this.content = props.content
-        this.slug = props.slug 
-        this.authorId = props.authorId
-        // se eu passo o id, eh por conta que eu estou querendo realizar uma referencia a um Question
-        // ja criado, caso eu nao passo, eu crio com um ID -randomUUID (ou seja, crio esse novo Question)
-        this.id = id ?? randomUUID()
-
+        //Enviando o id e as props para o construtor da minha classe Entity
+        super(props, id)
     }
 }
 
