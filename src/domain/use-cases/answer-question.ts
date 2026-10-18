@@ -1,5 +1,6 @@
 import { Answer } from "@/domain/entities/answer.js"
 import type { AnswersRepository } from "../repositories/answers-repository.js"
+import { UniqueEntityID } from "@/core/entities/unique-entity-id.js"
 
 // dados que o caso de uso precisa receber para executar
 interface AnswerQuestionUseCaseRequest {
@@ -20,10 +21,10 @@ export class AnswerQuestionUseCase {
         // ainda NAO foi pro banco, eh apenas a entidade montada com os dados
         // authorId recebe o instructorId (o autor da resposta eh o instrutor)
         // questionId liga a resposta a pergunta que esta sendo respondida
-        const answer = new Answer({
+        const answer = Answer.create({
             content,
-            authorId: instructorId,
-            questionId,
+            authorId: new UniqueEntityID(instructorId),
+            questionId: new UniqueEntityID(questionId),
         })
 
         // PASSO 2: salva (persiste) a Answer que foi criada acima

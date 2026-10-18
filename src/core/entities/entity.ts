@@ -15,10 +15,10 @@ export class Entity<Props> {
     return this._id
   }
 
-  constructor(props: Props, id?: string) {
+  protected constructor(props: Props, id?: UniqueEntityID) {
     this.props = props
     // se eu passo o id na props, eh por conta que eu estou querendo realizar uma referencia
     // ja criado, caso eu nao passo, eu crio com um ID -randomUUID (ou seja, crio esse novo Instructor, Stund ...)
-    this._id = new UniqueEntityID(id)
+    this._id = id ?? new UniqueEntityID()
   }
 }
