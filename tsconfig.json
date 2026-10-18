@@ -15,7 +15,6 @@
     // and npm install -D @types/node
 
     // Path alias: "@/domain/..." aponta para "src/domain/..."
-    "baseUrl": "./",  
     "paths": {
       "@/*": ["./src/*"]
     },
